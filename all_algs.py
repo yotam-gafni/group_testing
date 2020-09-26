@@ -123,8 +123,6 @@ def NDD(t_res, t2i, i2t):
 
 	pred_defective, extra_pnd = top_k_from_item_scores(iscores2)
 	pred_non_defective = pred_non_defective.union(extra_pnd)
-	#how_wrong = len(non_defective.difference(pred_non_defective)) + len(defective.difference(pred_defective))
-	#print("first size: {}, how_wrong: {}".format(first_size, how_wrong))
 
 	return pred_defective, pred_non_defective
 
@@ -286,7 +284,7 @@ def BP(t_res, t2i, i2t):
 
 phi = 0.01
 theta = 0.05
-alg_func = LP
+alg_func = NCOMP
 
 for TESTS in [100,150,200,250]:
 	success_count = 0
@@ -445,7 +443,7 @@ for TESTS in [100,150,200,250]:
 				sum_how_wrong[1 + test_regime] += how_wrong
 				how_wrong_histograms[1+test_regime].append(how_wrong)
 
-	for i in range(1):
+	for i in range(4):
 		print("TESTS: {}. Alg func: {}. Avg wrong {}, stopping time: {}".format(TESTS, alg_func, sum_how_wrong[i] / stopping_time[i], stopping_time[i]))
 		print("TESTS: {}. Alg func: {}. Full histogram {}".format(TESTS, alg_func, how_wrong_histograms[i]))
 
